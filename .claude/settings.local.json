@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m py_compile server.py)",
+      "Bash(python -m py_compile client.py)",
+      "Bash(python -c ' *)"
+    ]
+  }
+}

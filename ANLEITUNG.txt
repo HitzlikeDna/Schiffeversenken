@@ -1,0 +1,128 @@
+====================================================
+         SCHIFFEVERSENKEN - EINRICHTUNG
+====================================================
+
+
+VORAUSSETZUNG
+-------------
+- Python 3 muss auf beiden Geräten installiert sein.
+  Download: https://www.python.org/downloads/
+- Beide Geräte müssen im selben Netzwerk sein (z.B. WLAN).
+- Keine zusätzlichen Python-Pakete nötig.
+
+
+----------------------------------------------------
+SPIELER 1 (hostet das Spiel)
+----------------------------------------------------
+
+Schritt 1: IP-Adresse herausfinden
+   Windows: Eingabeaufforderung öffnen → "ipconfig" eingeben
+            → IPv4-Adresse notieren (z.B. 192.168.1.42)
+   Mac/Linux: Terminal öffnen → "ifconfig" oder "ip a" eingeben
+
+Schritt 2: Server starten
+   Terminal öffnen im Ordner "Schiffeversenken"
+   Befehl: python server.py
+   → Der Server läuft jetzt und wartet auf Verbindungen.
+   → Dieses Fenster offen lassen!
+
+Schritt 3: Eigenen Client starten
+   Ein ZWEITES Terminal öffnen (Server-Fenster nicht schließen!)
+   Befehl: python client.py
+   → Server-IP: einfach Enter drücken (bleibt leer = localhost)
+   → Deinen Namen eingeben
+   → "1" wählen (Neue Lobby erstellen)
+   → Ein 4-buchstabiger Code erscheint (z.B. XKQR)
+   → Diesen Code an Spieler 2 schicken
+
+Schritt 4: Schiffe platzieren
+   → Eingabe: Zeile Spalte Richtung
+   → Beispiel: "2 3 h" = Schiff beginnt bei Zeile 2, Spalte 3, horizontal
+   → "v" = vertikal, "h" = horizontal
+   → Zeilen und Spalten gehen von 0 bis 9
+   → Alle 5 Schiffe nacheinander platzieren
+
+Schritt 5: Warten bis Spieler 2 beigetreten ist und Spiel startet
+
+
+----------------------------------------------------
+SPIELER 2 (tritt der Lobby bei)
+----------------------------------------------------
+
+Schritt 1: Client starten
+   Terminal öffnen im Ordner "Schiffeversenken"
+   Befehl: python client.py
+   → Server-IP eingeben (die IP-Adresse von Spieler 1, z.B. 192.168.1.42)
+   → Deinen Namen eingeben
+   → "2" wählen (Lobby beitreten)
+   → Den Code von Spieler 1 eingeben (z.B. XKQR)
+
+Schritt 2: Schiffe platzieren
+   → Eingabe: Zeile Spalte Richtung
+   → Beispiel: "0 0 v" = Schiff beginnt bei Zeile 0, Spalte 0, vertikal
+   → Alle 5 Schiffe nacheinander platzieren
+
+Schritt 3: Warten bis das Spiel startet
+
+
+----------------------------------------------------
+SPIELREGELN & STEUERUNG
+----------------------------------------------------
+
+Schiffe:
+   Träger        - Länge 5
+   Schlachtschiff - Länge 4
+   Kreuzer       - Länge 3
+   U-Boot        - Länge 3
+   Zerstörer     - Länge 2
+
+Schiffs-Platzierung:
+   Format: Zeile Spalte Richtung
+   Beispiel: 3 5 h  → startet bei (3,5), geht nach rechts
+   Beispiel: 1 2 v  → startet bei (1,2), geht nach unten
+   Schiffe dürfen nicht aneinander grenzen oder überlappen.
+
+Im Spiel schießen:
+   Format: Zeile Spalte
+   Beispiel: 4 7  → schießt auf Zeile 4, Spalte 7
+
+Chat während des Spiels:
+   Format: c Nachricht
+   Beispiel: c Gutes Spiel!
+
+Beenden:
+   q  → Spiel verlassen
+
+Feldanzeige:
+   ~  = unbekannt / Wasser
+   S  = eigenes Schiff
+   X  = Treffer
+   O  = Verfehlt (Wasser)
+
+Besonderheit: Bei einem Treffer darf man nochmal schießen!
+Das Spiel endet wenn alle Schiffe des Gegners versenkt sind.
+
+
+----------------------------------------------------
+PROBLEMLÖSUNG
+----------------------------------------------------
+
+"Verbindung fehlgeschlagen":
+   - Prüfen ob server.py noch läuft
+   - IP-Adresse von Spieler 1 korrekt eingegeben?
+   - Beide Geräte im selben Netzwerk (WLAN)?
+   - Windows Firewall: Port 5555 freigeben
+     → Systemsteuerung → Windows Defender Firewall
+     → Erweiterte Einstellungen → Eingehende Regeln
+     → Neue Regel → Port 5555 (TCP) erlauben
+
+"Lobby nicht gefunden":
+   - Code korrekt eingegeben? (Groß-/Kleinschreibung egal)
+   - Ist Spieler 1 bereits im Client und hat die Lobby erstellt?
+
+"python" nicht gefunden:
+   - Python ist nicht installiert oder nicht im PATH
+   - Windows: Bei der Installation "Add to PATH" aktivieren
+   - Alternativ "python3" statt "python" versuchen
+
+====================================================
