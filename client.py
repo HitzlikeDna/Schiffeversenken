@@ -5,7 +5,7 @@ try:
     import pygame
 except ImportError:
     print("Installiere pygame...")
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "pygame"])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "--user", "pygame"])
     import pygame
 
 import socket

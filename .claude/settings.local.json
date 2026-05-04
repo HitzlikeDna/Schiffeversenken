@@ -3,7 +3,9 @@
     "allow": [
       "Bash(python -m py_compile server.py)",
       "Bash(python -m py_compile client.py)",
-      "Bash(python -c ' *)"
+      "Bash(python -c ' *)",
+      "Bash(pip --version)",
+      "Bash(pip install *)"
     ]
   }
 }
